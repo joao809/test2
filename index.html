@@ -142,19 +142,19 @@
             <img src="./assets/logo.png" alt="UKM">
         </div>
 
-        <h1>Access Unlocked</h1>
-        <p class="subtitle">Your device-locked license key is ready.</p>
+        <h1>Acesso Liberado</h1>
+        <p class="subtitle">Sua chave de acesso vinculada ao dispositivo está pronta.</p>
 
         <div class="card">
-            <h2>Generation Success!</h2>
-            <p class="card-p">This key is locked to your device. Share it, and it won't work for others.</p>
+            <h2>Gerada com Sucesso!</h2>
+            <p class="card-p">Esta chave está vinculada ao seu dispositivo. Se você a compartilhar, ela não funcionará para outras pessoas.</p>
 
             <div class="key-box">
-                <span id="finalKey">SECURE FETCHING...</span>
+                <span id="finalKey">RECUPERAÇÃO SEGURA...</span>
             </div>
 
             <button class="btn" id="copyBtn" onclick="copyKey()">
-                COPY TO CLIPBOARD
+                COPIAR PARA A ÁREA DE TRANSFERÊNCIA
             </button>
         </div>
     </div>
@@ -163,12 +163,12 @@
         <div class="error-card">
             <div class="error-icon">🚫</div>
             <div class="error-title">Bypass Detectado!</div>
-            <p style="color:#888; font-size: 14px; line-height: 1.5;">Direct access is prohibited. Please use the official link from the script to generate your key.</p>
-            <button class="btn btn-red" onclick="location.href='steps.html'">RETURN TO STEPS</button>
+            <p style="color:#888; font-size: 14px; line-height: 1.5;">O acesso direto é proibido. Utilize o link oficial fornecido no script para gerar sua chave.</p>
+            <button class="btn btn-red" onclick="location.href='steps.html'">RETORNAR ÀS ETAPAS</button>
         </div>
     </div>
 
-    <div class="footer">UNKNOWN MODZ SECURITY SYSTEM</div>
+    <div class="footer">SISTEMA DE SEGURANÇA FREEZA MOBILE</div>
 </div>
 
 <script>
@@ -239,7 +239,7 @@
             btn.innerText = "COPIADO COM SUCESSO! ✅";
             btn.style.background = "#00ff88";
             setTimeout(() => { 
-                btn.innerText = "COPY TO CLIPBOARD"; 
+                btn.innerText = "COPIAR PARA A ÁREA DE TRANSFERÊNCIA"; 
                 btn.style.background = "#ffffff";
             }, 2000);
         });
