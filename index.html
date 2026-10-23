@@ -177,7 +177,8 @@
         const source = urlParams.get('source');
         const referrer = document.referrer;
         
-        if (source === "official" || referrer.includes("earnlinks.io") || referrer.includes("lootdest.org") || referrer.includes("steps.html")) {
+        // Verificação atualizada para aceitar o earnlinks.in e steps.html
+        if (source === "official" || referrer.includes("earnlinks.in") || referrer.includes("earnlinks.io") || referrer.includes("lootdest.org") || referrer.includes("steps.html")) {
             if (source === "official") {
                 const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
                 window.history.replaceState({}, document.title, cleanUrl);
@@ -192,43 +193,39 @@
     }
 
     async function generateLockedKey() {
-    try {
-        const response = await fetch('https://api.ipify.org?format=json');
-        const data = await response.json();
-        const ip = data.ip;
+        try {
+            const response = await fetch('https://api.ipify.org?format=json');
+            const data = await response.json();
+            const ip = data.ip;
 
-        // Aaj ki Date (Daily expiry ke liye)
-        const day = Math.floor(Date.now() / 86400000);
-        const ipSeed = parseInt(ip.replace(/\./g, '').substring(0, 6)); 
-        
-        // Seed: IP + Date + Year (Ye App se match hona chahiye)
-        let seed = ipSeed + day + 2026; 
-        
-        function rnd() { 
-            var x = Math.sin(seed++) * 10000; 
-            return Math.abs(x - Math.floor(x)); 
-        }
-        
-        const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-        let segments = [];
-        for(let i=0; i<4; i++) {
-            let s = "";
-            for(let j=0; j<4; j++) {
-                let r = Math.floor(rnd() * chars.length);
-                s += chars.charAt(r);
+            const day = Math.floor(Date.now() / 86400000);
+            const ipSeed = parseInt(ip.replace(/\./g, '').substring(0, 6)); 
+            
+            let seed = ipSeed + day + 2026; 
+            
+            function rnd() { 
+                var x = Math.sin(seed++) * 10000; 
+                return Math.abs(x - Math.floor(x)); 
             }
-            segments.push(s);
+            
+            const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+            let segments = [];
+            for(let i=0; i<4; i++) {
+                let s = "";
+                for(let j=0; j<4; j++) {
+                    let r = Math.floor(rnd() * chars.length);
+                    s += chars.charAt(r);
+                }
+                segments.push(s);
+            }
+
+            const finalKey = "FRE-" + segments.join("-");
+            document.getElementById('finalKey').innerText = finalKey;
+
+        } catch (err) {
+            document.getElementById('finalKey').innerText = "CONECTE À INTERNET";
         }
-
-        const finalKey = "FRE-" + segments.join("-");
-        document.getElementById('finalKey').innerText = finalKey;
-
-    } catch (err) {
-        document.getElementById('finalKey').innerText = "CONECTE À INTERNET";
     }
-}
-
-
 
     function copyKey() {
         const keyText = document.getElementById('finalKey').innerText;
